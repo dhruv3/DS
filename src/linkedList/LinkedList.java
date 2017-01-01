@@ -61,6 +61,7 @@ public class LinkedList {
 		listNode temp = head;
 		head = temp.getNode();
 		temp.setNext(null);
+		length--;
 		return head;
 	}
 	
@@ -72,6 +73,7 @@ public class LinkedList {
 			temp = temp.getNode();
 		}
 		prevTemp.setNext(null);
+		length--;
 		return prevTemp;
 	}
 	
@@ -109,8 +111,8 @@ public class LinkedList {
 			}
 			prevNode.setNext(tempNode.getNode());
 			tempNode.setNext(null);
+			length--;
 		}
-		length--;
 	}
 	
 	public String toString(){
