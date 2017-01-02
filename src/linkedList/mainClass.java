@@ -68,27 +68,27 @@ public class mainClass {
 		dLList.insert(6, 5);
 		
 		String result = dLList.toString();
-		System.out.println(result);
+		System.out.println("Test of toString: " + "\n" + result);
 		
 		dLList.insertAtStart(-1);
 		result = dLList.toString();
-		System.out.println(result);
+		System.out.println("Test of insertAtStart: " + "\n" + result);
 		
 		dLList.insertAtTail(7);
 		result = dLList.toString();
-		System.out.println(result);
+		System.out.println("Test of insertAtTail: " + "\n" + result);;
 		
 		dLList.removeFromStart();
 		result = dLList.toString();
-		System.out.println(result);
+		System.out.println("Test of removeFromStart: " + "\n" + result);
 		
 		dLList.removeFromEnd();
 		result = dLList.toString();
-		System.out.println(result);
+		System.out.println("Test of removeFromEnd: " + "\n" + result);
 		
 		dLList.remove(3);
 		result = dLList.toString();
-		System.out.println(result);	
+		System.out.println("Test of remove: " + "\n" + result);	
 	}
 		
 }

@@ -7,9 +7,11 @@ public class DoublyLinkedList {
 	private DLLNode tail;
 	
 	public DoublyLinkedList(){
-		head = new DLLNode(Integer.MIN_VALUE, null, null);
-		tail = new DLLNode(Integer.MIN_VALUE, null, null);
-		head.setNext(tail);
+//		head = new DLLNode(Integer.MIN_VALUE, null, null);
+//		tail = new DLLNode(Integer.MIN_VALUE, null, null);
+		head = null;
+		tail = null;
+		//head.setNext(tail);
 		length = 0;
 	}
 	
@@ -20,8 +22,14 @@ public class DoublyLinkedList {
 	//value is sent 
 	public synchronized void insertAtStart(int newValue){
 		DLLNode node = new DLLNode(newValue, null, head);
-		head = node;
-		node.getNext().setPrev(node);
+		if(head == null){
+			head = node;
+			tail = node;
+		}
+		else{
+			head = node;
+			node.getNext().setPrev(node);
+		}
 		length++;
 	}
 	
@@ -30,6 +38,7 @@ public class DoublyLinkedList {
 		DLLNode node = new DLLNode(newValue, null, null);
 		if(head == null){
 			head = node; 
+			tail = node;
 		}
 		else{
 			DLLNode temp = head;
@@ -38,6 +47,7 @@ public class DoublyLinkedList {
 			}
 			temp.setNext(node);
 			node.setPrev(temp);
+			tail = node;
 		}
 		length++;
 	}
@@ -61,8 +71,8 @@ public class DoublyLinkedList {
 			temp.setPrev(currentNode);
 			currentNode.setNext(temp);
 			temp.getNext().setPrev(temp);
+			length++;
 		}
-		length++;
 	}
 	
 	//remove head and then return the new head value
