@@ -6,3 +6,8 @@ I intend to implement data structures in this repository.
 Single Linked List
 
 Doubly Linked List
+
+##Stack
+Dynamic Array Stack
+
+Linked List Stack
