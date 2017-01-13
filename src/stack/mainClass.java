@@ -31,6 +31,22 @@ public class mainClass {
 		daStack.push(3);
 		daStack.push(4);
 		daStack.push(5);
+		System.out.println("Initial stack " + daStack.toString());
+		
+		System.out.println("Topmost element is " + daStack.top());
+		
+		daStack.pop();
+		daStack.pop();
+		System.out.println("Stack after removing 4,5: " + daStack.toString());
+		System.out.println("New topmost element is " + daStack.top());
+		
+		daStack.push(4);
+		daStack.push(5);
+		daStack.push(6);
+		System.out.println("Check if expanding array is working");
+		
+		daStack.pop();
+		daStack.pop();
 	}
 	
 		

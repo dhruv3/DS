@@ -30,7 +30,7 @@ public class DynamicArrayStack {
 	//double array when array is full
 	public void push(int data) throws Exception{
 		//double the size
-		if(getSize() >= capacity){
+		if(getSize() == capacity){
 			expandArray();
 		}
 		stack[++top] = data;
@@ -60,7 +60,7 @@ public class DynamicArrayStack {
 		}
 		int topElement =  stack[top];
 		top--;
-		if(getSize() < (stack.length)*(3/4)){
+		if(getSize() < (stack.length)*(3.0/4)){
 			shrink();
 		}
 		return topElement;
