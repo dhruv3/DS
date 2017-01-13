@@ -34,9 +34,7 @@ public class LinkedStack {
 			throw new Exception("Stack is empty. Pop wont work.");
 		}
 		int topElement =  top.getData();
-		listNode temp = top.getNode();
-		top.setNext(null);
-		top = temp;
+		top = top.getNode();
 		length--;
 		return topElement;
 	}
