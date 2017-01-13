@@ -17,11 +17,37 @@ public class mainClass {
 			testSLL(daStack);
 			break;
 		case "2":
+			LinkedStack llStack = new LinkedStack();
+			testLLStack(llStack);
 			break;
 		default:
 			break;
 		}
 		
+	}
+
+	private static void testLLStack(LinkedStack llStack) throws Exception {
+		llStack.push(1);
+		llStack.push(2);
+		llStack.push(3);
+		llStack.push(4);
+		llStack.push(5);
+		System.out.println("Initial stack " + llStack.toString());
+		
+		System.out.println("Topmost element is " + llStack.peek());
+		
+		llStack.pop();
+		llStack.pop();
+		System.out.println("Stack after removing 4,5: " + llStack.toString());
+		System.out.println("New topmost element is " + llStack.peek());
+		
+		llStack.push(4);
+		llStack.push(5);
+		llStack.push(6);
+		System.out.println("Check if expanding array is working");
+		
+		llStack.pop();
+		llStack.pop();		
 	}
 
 	private static void testSLL(DynamicArrayStack daStack) throws Exception {
