@@ -14,6 +14,9 @@ public class FixedSizeArrayQueue {
 		rear = 0;
 	}
 	
+	//add the element at the end
+	//update rear pointer and increment size
+	//modulus used so as to create a circular queue
 	public void enqueue(int data) throws Exception{
 		if(getSize() == capacity){
 			throw new Exception("Size of queue is full. Please dequeue before enqueuing.");
@@ -23,6 +26,9 @@ public class FixedSizeArrayQueue {
 		size++;
 	}
 	
+	//remove the element at the front
+	//update front pointer and decrement size
+	//modulus used so as to create a circular queue
 	public int dequeue() throws Exception{
 		if(getSize() == 0){
 			throw new Exception("Queue is empty. What are you doing?");
@@ -51,10 +57,14 @@ public class FixedSizeArrayQueue {
 			return "Queue is Empty. Nothing to print.";
 		}
 		String result = "[ ";
+		
+		//number elements to print are equal to size
+		//front+i gives required offset
+		//modulus op ensures that we handle circular condition
 		for(int i = 0; i < size; i++){
-			result = result + queue[i] + ", ";
+			result = result + queue[(i + front) % capacity] + " ";
 		}
-		result = "]";
+		result = result + "]";
 		return result;
 	}
 	
