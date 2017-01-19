@@ -13,6 +13,9 @@ public class mainClass {
 			System.out.println(root.getData());
 			PreOrder(root.getLeft());
 			PreOrder(root.getRight());
+			//check added so as to end recursion
+			//need to get it verified
+			root = null;
 		}
 	}
 
@@ -30,7 +33,9 @@ public class mainClass {
 		BinaryTreeNode n7 = new BinaryTreeNode(7);
 		n3.setLeft(n6);
 		n3.setRight(n7);
+		
 		BinaryTreeNode root = n1;
+		
 		return root;
 	}
 
