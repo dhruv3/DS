@@ -4,9 +4,32 @@ public class mainClass {
 
 	public static void main(String[] args) {
 		BinaryTreeNode root = createTree();
+		System.out.println("PreOrder Traversal:");
 		PreOrder(root);
+		System.out.println("InOrder Traversal:");
+		InOrder(root);
+		System.out.println("PostOrder Traversal:");
+		PostOrder(root);
 	}
 
+	private static void PostOrder(BinaryTreeNode root) {
+		if(root != null){
+			PostOrder(root.getLeft());
+			PostOrder(root.getRight());
+			System.out.println(root.getData());
+		}
+	}
+
+	//L Root R
+	private static void InOrder(BinaryTreeNode root) {
+		if(root != null){
+			InOrder(root.getLeft());
+			System.out.println(root.getData());
+			InOrder(root.getRight());
+		}
+	}
+
+	//Root L R
 	//each node is processed BEFORE either of its subtree
 	private static void PreOrder(BinaryTreeNode root) {
 		if(root != null){
