@@ -9,13 +9,13 @@ public class mainClass {
 
 	//each node is processed BEFORE either of its subtree
 	private static void PreOrder(BinaryTreeNode root) {
-		while(root != null){
+		if(root != null){
 			System.out.println(root.getData());
 			PreOrder(root.getLeft());
 			PreOrder(root.getRight());
-			//check added so as to end recursion
-			//need to get it verified
-			root = null;
+			//following check was required because I used while instead of if
+			//corrected code by using if
+			//root = null;
 		}
 	}
 
