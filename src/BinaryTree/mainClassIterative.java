@@ -1,5 +1,7 @@
 package BinaryTree;
 
+import java.util.LinkedList;
+import java.util.Queue;
 import java.util.Stack;
 
 public class mainClassIterative {
@@ -12,8 +14,26 @@ public class mainClassIterative {
 		InOrder(root);
 		System.out.println("PostOrder Traversal:");
 		PostOrder(root);
+		System.out.println("Level Order Traversal:");
+		LevelOrder(root);
 	}
 	
+	//BFS
+	private static void LevelOrder(BinaryTreeNode root) {
+		Queue<BinaryTreeNode> myLine = new LinkedList<BinaryTreeNode>();
+		myLine.add(root);
+		while(!myLine.isEmpty()){
+			BinaryTreeNode temp = myLine.poll();
+			System.out.println(temp.getData());
+			if(temp.getLeft() != null){
+				myLine.add(temp.getLeft());
+			}
+			if(temp.getRight() != null){
+				myLine.add(temp.getRight());
+			}
+		}
+	}
+
 	//Root L R
 	//each node is processed BEFORE either of its subtree
 	private static void PreOrder(BinaryTreeNode root) {
