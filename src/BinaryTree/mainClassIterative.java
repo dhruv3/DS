@@ -17,7 +17,7 @@ public class mainClassIterative {
 	//Root L R
 	//each node is processed BEFORE either of its subtree
 	private static void PreOrder(BinaryTreeNode root) {
-		Stack<BinaryTreeNode> st = new Stack();
+		Stack<BinaryTreeNode> st = new Stack<BinaryTreeNode>();
 		st.add(root);
 		while(!st.isEmpty()){
 			BinaryTreeNode temp = st.pop();
@@ -30,22 +30,45 @@ public class mainClassIterative {
 	}
 
 	//L R Root
+	//tutorial: https://www.youtube.com/watch?v=xLQKdq0Ffjg
 	private static void PostOrder(BinaryTreeNode root) {
-		Stack<BinaryTreeNode> st = new Stack();
-		st.add(root);
-		while(!st.isEmpty()){
-			BinaryTreeNode temp = st.pop();
-			if(temp.getRight() != null)
-				st.add(temp.getRight());
-			if(temp.getLeft() != null)
-				st.add(temp.getLeft());
-			System.out.println(temp.getData());
+		BinaryTreeNode current = root;
+		Stack<BinaryTreeNode> st = new Stack<BinaryTreeNode>();
+		//loop 
+		while(current != null || !st.isEmpty()){
+			//if current is not empty; add it to stack and update current to left node
+			if(current != null){
+				st.push(current);
+				current = current.getLeft();
+			}
+			else{
+				//get right node of topmost node in the stack
+				BinaryTreeNode temp = ((BinaryTreeNode) st.peek()).getRight();
+				//if right node does NOT exist
+				if(temp == null){
+					//right node is NULL-->We are done with LEFT and RIGHT side of topmost stack node
+					//pop and print topmost stack element
+					temp = (BinaryTreeNode) st.pop();
+					System.out.println(temp.getData());
+					//check if popped node is same as the NEW topmost node right neighbor
+					//if it is => we have completed with both left & right subtrees
+					//pop topmost node
+					while(!st.isEmpty() && temp == ((BinaryTreeNode) st.peek()).getRight()){
+						temp = (BinaryTreeNode) st.pop();
+						System.out.println(temp.getData());
+					}
+				}
+				else{
+					//set current to temp; This will insert the right element into the stack.
+					current = temp;
+				}
+			}
 		}
 	}
 
 	//L Root R
 	private static void InOrder(BinaryTreeNode root) {
-		Stack<BinaryTreeNode> st = new Stack();
+		Stack<BinaryTreeNode> st = new Stack<BinaryTreeNode>();
 		BinaryTreeNode currentNode = root;
 		do{
 			if(currentNode != null){
