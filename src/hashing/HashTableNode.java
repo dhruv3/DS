@@ -16,7 +16,7 @@ public class HashTableNode {
 		return startNode; 
 	}
 	
-	public void setStartNode(ListNode next){
+	public void setStartNode(ListNode startNode){
 		this.startNode = startNode; 
 	}
 
