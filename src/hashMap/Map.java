@@ -6,14 +6,15 @@ import java.util.ArrayList;
 public class Map<K,V> {
 	
 	// bucketArray is used to store array of chains
-	ArrayList<HashNode<K, V>>bucket = new ArrayList<>();
+	ArrayList<HashNode<K, V>> bucket = new ArrayList<>();
 	
 	// Current capacity of array list
 	int numBuckets = 10;
 	
 	// Current size of array list
-	int size;
+	int size = 0;
 	
+	// Constructor
 	public Map()
 	{
 		for(int i=0;i<numBuckets;i++)
@@ -21,23 +22,32 @@ public class Map<K,V> {
 			bucket.add(null);
 		}
 	}
+	
+	
 	public int getSize()
 	{
 		return size;
 	}
+	
 	public boolean isEmpty()
 	{
 		return size==0;
 	}
+	
+	// This implements hash function to find index for key
 	private int getBucketIndex(K key)
 	{
-		int hashCod=key.hashCode();
-		return hashCod%numBuckets;
+		int hashCode = key.hashCode();
+		return hashCode % numBuckets;
 	}
+	
+	// Returns value for a key
 	public V get(K key)
 	{
-		int index=getBucketIndex(key);
-		HashNode<K, V> head=bucket.get(index);
+		//which bucket will it get assigned to after going through hash function
+		int index = getBucketIndex(key);
+		//get the node present at above index
+		HashNode<K, V> head = bucket.get(index);
 		while(head!=null)
 		{
 			if(head.key.equals(key))
@@ -48,6 +58,8 @@ public class Map<K,V> {
 		}
 		return null;	
 	}
+	
+	
 	public V remove(K key)
 	{
 		int index=getBucketIndex(key);
@@ -83,40 +95,47 @@ public class Map<K,V> {
 			return null;
 		}
 	}
+	
+	
 	public void add(K key,V value)
 	{
-		
-		int index=getBucketIndex(key);
+		int index = getBucketIndex(key);
 		System.out.println(index);
 		HashNode<K, V>head=bucket.get(index);
+		
+		//create new node and update its properties
 		HashNode<K, V>toAdd=new HashNode<>();
 		toAdd.key=key;
 		toAdd.value=value;
+		
 		if(head==null)
 		{
 			bucket.set(index, toAdd);
 			size++;
-			
 		}
 		else
 		{
-		while(head!=null)
-		{
-			if(head.key.equals(key))
+			while(head!=null)
 			{
-				head.value=value;
-				size++;
-				break;
+				//head exists and key is same then update the value and BREAK
+				if(head.key.equals(key))
+				{
+					head.value=value;
+					//BUG
+					//size++;
+					break;
+				}
+				//traverse till the last node
+				head=head.next;
 			}
-			head=head.next;
-		}
-		if(head==null)
-		{
-		head=bucket.get(index);
-		toAdd.next=head;
-		bucket.set(index, toAdd);
-		size++;
-		}
+			
+			if(head==null)
+			{
+				head = bucket.get(index);
+				toAdd.next = head;
+				bucket.set(index, toAdd);
+				size++;
+			}
 		}
 		if((1.0*size)/numBuckets>0.7)
 		{
@@ -141,10 +160,13 @@ public class Map<K,V> {
 		}
 		
 	}
+	
+	
 	public static void main(String[] args)
 	{
-		Map<String,Integer>map=new Map<>();
+		Map<String,Integer> map = new Map<>();
 		map.add("this",1 );
+		map.add("this",2 );
 		System.out.println(map.remove("this"));
 		System.out.println(map.remove("this"));
 		
