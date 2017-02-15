@@ -11,7 +11,7 @@ public class Map<K,V> {
 	// Current capacity of array list
 	int numBuckets = 10;
 	
-	// Current size of array list
+	// Current elements in array list
 	int size = 0;
 	
 	// Constructor
@@ -62,8 +62,8 @@ public class Map<K,V> {
 	
 	public V remove(K key)
 	{
-		int index=getBucketIndex(key);
-		HashNode<K, V>head=bucket.get(index);
+		int index = getBucketIndex(key);
+		HashNode<K, V> head = bucket.get(index);
 		if(head==null)
 		{
 			return null;
@@ -140,15 +140,18 @@ public class Map<K,V> {
 		if((1.0*size)/numBuckets>0.7)
 		{
 			//do something
-			ArrayList<HashNode<K, V>>tmp=bucket;
-			bucket=new ArrayList<>();
-			numBuckets=2*numBuckets;
+			ArrayList<HashNode<K, V>> tmp = bucket;
+			
+			bucket = new ArrayList<>();
+			numBuckets = 2*numBuckets;
 			for(int i=0;i<numBuckets;i++)
 			{
 				bucket.add(null);
 			}
+			
 			for(HashNode<K, V> headNode:tmp)
 			{
+				//traverse along every node till you reach the end
 				while(headNode!=null)
 				{
 					add(headNode.key, headNode.value);
