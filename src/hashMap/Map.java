@@ -3,7 +3,7 @@ package hashMap;
 import java.util.ArrayList;
 
 //Class to represent entire hash table
-public class Map<K,V> {
+public class Map<K,V>{
 	
 	// bucketArray is used to store array of chains
 	ArrayList<HashNode<K, V>> bucket = new ArrayList<>();
@@ -22,7 +22,6 @@ public class Map<K,V> {
 			bucket.add(null);
 		}
 	}
-	
 	
 	public int getSize()
 	{
@@ -100,7 +99,6 @@ public class Map<K,V> {
 	public void add(K key,V value)
 	{
 		int index = getBucketIndex(key);
-		System.out.println(index);
 		HashNode<K, V>head=bucket.get(index);
 		
 		//create new node and update its properties
