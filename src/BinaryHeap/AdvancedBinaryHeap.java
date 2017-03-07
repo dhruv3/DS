@@ -24,7 +24,7 @@ public class AdvancedBinaryHeap {
 	}
 	
 	//children of a node
-	//left child
+	//left child idx is returned
 	public int LeftChild(int parentIdx){
 		int leftChildIdx = 2*parentIdx + 1;
 		if(leftChildIdx >= this.count)
@@ -32,7 +32,7 @@ public class AdvancedBinaryHeap {
 		return leftChildIdx;
 	}
 	
-	//right child
+	//right child idx is returned
 	public int RightChild(int parentIdx){
 		int rightChildIdx = 2*parentIdx + 2;
 		if(rightChildIdx >= this.count)
@@ -47,5 +47,63 @@ public class AdvancedBinaryHeap {
 			return -1;
 		return this.array[0];
 	}
+	
+	//heapifying an element
+	public void PercolateDown(int i){
+		int max;
+		int leftChildIdx = LeftChild(i);
+		int rightChildIdx = RightChild(i);
+		if(array[leftChildIdx] > array[rightChildIdx]){
+			max = leftChildIdx;
+		}
+		else{
+			max = rightChildIdx;
+		}
+		
+		if(array[i] < array[max]){
+			int temp = array[max];
+			array[max] = array[i];
+			array[i] = temp;
+		}
+		PercolateDown(max);
+	}
+	
+	//get the heap element 
+	public int DeleteMax(){
+		int tempRoot = array[0];
+		array[0] = array[this.count - 1];
+		PercolateDown(0);
+		this.count--;
+		return tempRoot;
+	}
+	
+	public void Insert(int data){
+		if(this.count == this.capacity)
+			ResizeHeap();
+		
+		this.count++;
+		int i = this.count - 1;
+		while(i >= 0 && data > this.array[(i-1)/2]){//(i-1)/2 should floor the ratio in order to work
+			this.array[i] = this.array[(i-1)/2];
+			i = (i-1)/2;
+		}
+		this.array[i] = data;
+	}
+
+	private void ResizeHeap() {
+		int[] array_old = new int[this.capacity];
+		System.arraycopy(this.array, 0, array_old, 0, this.capacity);
+		this.array = new int[this.capacity*2];
+		for(int i = 0; i < this.capacity; i++)
+			this.array[i] = array_old[i];
+		this.capacity = this.capacity*2;
+		array_old = null;
+	}
+	
+	public void DestroyHeap(){
+		this.count = 0;
+		this.array = null;
+	}
+	
 	
 }
