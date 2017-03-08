@@ -5,6 +5,21 @@ public class mainFile {
 	
 
 	public static void main(String[] args) {
+		//oldHeapTest();
+		
+		AdvancedBinaryHeap myHeap = new AdvancedBinaryHeap(8, 1);
+		int[] myArray = {2,1,3,4,5,6,7,8};
+		for(int i = 0; i < myArray.length; i++){
+			myHeap.Insert(myArray[i]);
+		}
+		//check if correct array is formed
+		System.out.println("Current positioning in heap is:" + myHeap.getString());
+		//test percolatedown function
+		System.out.println("Root is:" + myHeap.DeleteMax());
+		System.out.println("Current positioning in heap is:" + myHeap.getString());
+	}
+
+	private static void oldHeapTest() {
 		int[] myArray = {100, 12,22,3,40,5,6,7,8,9};
 		MyBinaryHeap fringe = new MyBinaryHeap(11);
 		

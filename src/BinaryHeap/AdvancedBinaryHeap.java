@@ -53,11 +53,16 @@ public class AdvancedBinaryHeap {
 		int max;
 		int leftChildIdx = LeftChild(i);
 		int rightChildIdx = RightChild(i);
-		if(array[leftChildIdx] > array[rightChildIdx]){
+		if(leftChildIdx != -1 && array[leftChildIdx] > array[rightChildIdx]){
 			max = leftChildIdx;
 		}
-		else{
+		else if(rightChildIdx != -1 && array[leftChildIdx] < array[rightChildIdx]){
 			max = rightChildIdx;
+		}
+		else{
+			max = i;
+			//randomly added to end recursions..
+			return;
 		}
 		
 		if(array[i] < array[max]){
@@ -72,8 +77,8 @@ public class AdvancedBinaryHeap {
 	public int DeleteMax(){
 		int tempRoot = array[0];
 		array[0] = array[this.count - 1];
+		this.count--; //size needs to be reduced before we percolate down
 		PercolateDown(0);
-		this.count--;
 		return tempRoot;
 	}
 	
@@ -83,11 +88,14 @@ public class AdvancedBinaryHeap {
 		
 		this.count++;
 		int i = this.count - 1;
-		while(i >= 0 && data > this.array[(i-1)/2]){//(i-1)/2 should floor the ratio in order to work
+		this.array[i] = data;
+		int temp;
+		while(i >= 0 && this.array[i] > this.array[(i-1)/2]){
+			temp = this.array[i];
 			this.array[i] = this.array[(i-1)/2];
+			this.array[(i-1)/2] = temp;
 			i = (i-1)/2;
 		}
-		this.array[i] = data;
 	}
 
 	private void ResizeHeap() {
@@ -103,6 +111,14 @@ public class AdvancedBinaryHeap {
 	public void DestroyHeap(){
 		this.count = 0;
 		this.array = null;
+	}
+	
+	public String getString(){
+		String out = "";
+		for(int i = 0; i < this.count; i++){
+			out = out + " " + array[i] ;
+		}
+		return out;
 	}
 	
 	
