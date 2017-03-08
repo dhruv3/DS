@@ -7,6 +7,14 @@ public class mainFile {
 	public static void main(String[] args) {
 		//oldHeapTest();
 		
+		//building a heap
+		AdvancedBinaryHeap newHeap = new AdvancedBinaryHeap(8, 1);
+		int[] inpArr = {2,1,3,4,5,6,7,8};
+		newHeap.BuildHeap(newHeap, inpArr, 8);
+		System.out.println("Current positioning in heap is:" + newHeap.getString());
+		//building a heap
+		
+		//general heap building method
 		AdvancedBinaryHeap myHeap = new AdvancedBinaryHeap(8, 1);
 		int[] myArray = {2,1,3,4,5,6,7,8};
 		for(int i = 0; i < myArray.length; i++){

@@ -53,7 +53,7 @@ public class AdvancedBinaryHeap {
 		int max;
 		int leftChildIdx = LeftChild(i);
 		int rightChildIdx = RightChild(i);
-		if(leftChildIdx != -1 && array[leftChildIdx] > array[rightChildIdx]){
+		if((leftChildIdx != -1 && rightChildIdx == -1) || (leftChildIdx != -1 && array[leftChildIdx] > array[rightChildIdx])){
 			max = leftChildIdx;
 		}
 		else if(rightChildIdx != -1 && array[leftChildIdx] < array[rightChildIdx]){
@@ -61,7 +61,7 @@ public class AdvancedBinaryHeap {
 		}
 		else{
 			max = i;
-			//randomly added to end recursions..
+			//randomly added to end recursions..=
 			return;
 		}
 		
@@ -108,11 +108,13 @@ public class AdvancedBinaryHeap {
 		array_old = null;
 	}
 	
+	//destroying heap
 	public void DestroyHeap(){
 		this.count = 0;
 		this.array = null;
 	}
 	
+	//get string output of array
 	public String getString(){
 		String out = "";
 		for(int i = 0; i < this.count; i++){
@@ -121,5 +123,20 @@ public class AdvancedBinaryHeap {
 		return out;
 	}
 	
-	
+	//heapify the array
+	public void BuildHeap(AdvancedBinaryHeap h, int[] inpArr, int n){
+		while(n > this.capacity)
+			h.ResizeHeap();
+		//add elements to heap array
+		for(int i = 0; i < n; i++){
+			h.array[i] = inpArr[i];
+		}
+		this.count = n;
+		//no need to check for leafs
+		//start from 1st non leaf node
+		//this node is parent parent of last leaf
+		for(int i = (n-1)/2; i >= 0; i--){
+			h.PercolateDown(i);
+		}
+	}
 }
