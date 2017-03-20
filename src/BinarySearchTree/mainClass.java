@@ -7,7 +7,7 @@ public class mainClass {
 		System.out.println("InOrder traversal of BST gives us a sorted list:");
 		InOrder(root);
 		//finding a node
-		BSTNode node = findNode(root, 10);
+		BSTNode node = findNode(root, 12);
 		if (node == null)
 			System.out.println("Integer not found");
 		else
@@ -77,11 +77,9 @@ public class mainClass {
 		if(root.getData() == data)
 			return root;
 		else if(root.getData() > data)
-			findNode(root.getLeft(), data);
+			return findNode(root.getLeft(), data);
 		else
-			findNode(root.getRight(), data);
-		
-		return null;
+			return findNode(root.getRight(), data);
 	}
 
 	//L Root R
