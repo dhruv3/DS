@@ -18,8 +18,38 @@ public class mainClass {
 		//finding max node
 		BSTNode maxNode = findMax(root);
 		System.out.println("Maximum Integer present is " + maxNode.getData());
+		//insert a node
+		insert(root, 200);
+		System.out.println("New tree:");
+		InOrder(root);
 	}
 	
+	private static void insert(BSTNode root, int data) {
+		BSTNode newNode = new BSTNode(data);
+		BSTNode temp = root;
+		if(root == null)
+			root = newNode;
+		
+		while(temp != null){
+			if(temp.getData() > data){
+				//check if you have encountered the desired leaf node
+				//insert at appropriate place
+				if(temp.getLeft() == null){
+					temp.setLeft(newNode);
+					break;
+				}
+				temp = temp.getLeft();
+			}
+			else{
+				if(temp.getRight() == null){
+					temp.setRight(newNode);
+					break;
+				}
+				temp = temp.getRight();
+			}
+		}
+	}
+
 	private static BSTNode findMax(BSTNode root) {
 		if(root == null)
 			return root;
