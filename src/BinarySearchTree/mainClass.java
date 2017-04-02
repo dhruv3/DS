@@ -20,8 +20,45 @@ public class mainClass {
 		System.out.println("Maximum Integer present is " + maxNode.getData());
 		//insert a node
 		insert(root, 200);
-		System.out.println("New tree:");
+		System.out.println("New tree after insertion:");
 		InOrder(root);
+		//delete a node
+		Delete(root, 10);
+		System.out.println("New tree after deletion:");
+		InOrder(root);
+	}
+	
+	private static BSTNode Delete(BSTNode root, int data){
+		if(root == null)
+			System.out.println("Element not present");
+		
+		if(data > root.getData()){
+			root.right = Delete(root.getRight(), data);
+		}
+		else if(data < root.getData()){
+			root.left = Delete(root.getLeft(), data);
+		}
+		//node to be deleted found
+		else{
+			//node to be deleted has two children
+			//get max node in left subtree and recursively delete that max node
+			if(root.getLeft() != null && root.getRight() != null){
+				BSTNode temp = findMax(root.getLeft());
+				root.setData(temp.getData());
+				root.left = Delete(root.getLeft(), temp.getData());
+			}
+			//node has only one child
+			else{
+				//if both child are null then this case is also handled below
+				if(root.getLeft() == null){
+					root = root.getRight();
+				}
+				else if(root.getRight() == null){
+					root = root.getLeft();
+				}
+			}
+		}
+		return root;
 	}
 	
 	private static void insert(BSTNode root, int data) {
