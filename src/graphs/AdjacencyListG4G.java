@@ -19,4 +19,12 @@ public class AdjacencyListG4G {
 	public void addEdge(int src, int dst){
 		adj[src].insertAtStart(new listNode(dst));
 	}
+	
+	public int vertexCount(){
+		return vertexCount;
+	}
+	
+	public LinkedList getList(int v){
+		return adj[v];
+	}
 }
