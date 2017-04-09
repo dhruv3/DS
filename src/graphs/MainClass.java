@@ -10,7 +10,7 @@ public class MainClass {
 		createGraph();
 		Scanner inp =  new Scanner(System.in);
 		System.out.println("Enter the traversal you want to run");
-		System.out.println("1. DFS \n 2.BFS \n 3. Topological Sort");
+		System.out.println("1. DFS \n2. BFS \n3. Topological Sort");
 		int choice = inp.nextInt();
 		switch(choice){
 			case 1:
@@ -47,11 +47,11 @@ public class MainClass {
 		LinkedList ll = g.getList(vertex);
 		listNode temp = ll.getHead();
 		while(temp != null){
-			temp = temp.getNode();
 			int data = temp.getData();
 			if(visited[data] == false){
 				dfsUtil(data, visited);
 			}
+			temp = temp.getNode();
 		}
 	}
 
