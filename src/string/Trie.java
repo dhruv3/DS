@@ -52,9 +52,9 @@ public class Trie {
 		}
 	}
 	
-	 public void delete(String word) {
-	        delete(root, word, 0);
-	    }
+	public void delete(String word) {
+		delete(root, word, 0);
+    }
 
     private boolean delete(TrieNode current, String word, int index) {
         if (index == word.length()) {
@@ -73,7 +73,7 @@ public class Trie {
         }
         boolean shouldDeleteCurrentNode = delete(node, word, index + 1);
 
-        //if true is returned then delete the mapping of character and trienode reference from map.
+        //if true is returned then delete the mapping of character and trie node reference from map.
         if (shouldDeleteCurrentNode) {
             current.children.remove(ch);
             //return true if no mappings are left in the map.
