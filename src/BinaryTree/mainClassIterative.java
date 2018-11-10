@@ -7,6 +7,7 @@ import java.util.Stack;
 public class mainClassIterative {
 
 	public static void main(String[] args) {
+		Node root1 = createTree1();
 		BinaryTreeNode root = createTree();
 		System.out.println("PreOrder Traversal:");
 		PreOrder(root);
@@ -16,6 +17,45 @@ public class mainClassIterative {
 		PostOrder(root);
 		System.out.println("Level Order Traversal:");
 		LevelOrder(root);
+		bfs(root1);
+	}
+	
+	private static LinkedList bfs(Node root){
+	    LinkedList<String> res = new LinkedList<String>();
+	    Queue<Node> myQ = new LinkedList<Node>();
+	    myQ.add(root);
+	    while(!myQ.isEmpty()){
+	        //tackling the None case
+	        Node tmp = myQ.poll();
+	        if(tmp.getData() == Integer.MAX_VALUE){
+	            res.add("None");
+	            continue;
+	        }
+	        else{
+	            //to do type conversion from int to string 
+	            res.add(""+tmp.getData());
+	        }
+	        //Now add children to queue
+	        //if left or right child is not present then create a fake node with data not set and add it to the queue
+	        if(tmp.getLeftChild() == null && tmp.getRightChild() == null){
+	            continue;
+	        }
+	        if(tmp.getLeftChild() == null){
+	            Node fake = new Node(Integer.MAX_VALUE);
+	            myQ.add(fake);
+	        }
+	        else{
+	            myQ.add(tmp.getLeftChild());
+	        }
+	        if(tmp.getRightChild() == null){
+	            Node fake = new Node(Integer.MAX_VALUE);
+	            myQ.add(fake);
+	        }
+	        else{
+	            myQ.add(tmp.getRightChild());
+	        }
+	    }
+	    return res;
 	}
 	
 	//BFS
@@ -120,6 +160,21 @@ public class mainClassIterative {
 		n3.setRight(n7);
 		
 		BinaryTreeNode root = n1;
+		
+		return root;
+	}
+	
+	private static Node createTree1() {
+		Node n1 = new Node(1);
+		Node n2 = new Node(2);
+		Node n3 = new Node(3);
+		n1.setLeftChild(n2);
+		n1.setRightChild(n3);
+		Node n4 = new Node(4);
+		Node n5 = new Node(5);
+		n2.setRightChild(n4);
+		n3.setLeftChild(n5);
+		Node root = n1;
 		
 		return root;
 	}
